@@ -12,4 +12,5 @@ Artisan::command('inspire', function () {
  * Schedule
  */
 
-Schedule::command(\Modules\Unas\Commands\UnasScrapeReferences::class)->daily();
+Schedule::command(\Modules\Unas\Commands\UnasScrapeReferences::class)->hourly();
+Schedule::command(\Modules\Shoprenter\Commands\ShoprenterScrapeReferences::class)->daily();

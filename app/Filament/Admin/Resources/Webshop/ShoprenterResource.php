@@ -2,14 +2,15 @@
 
 namespace App\Filament\Admin\Resources\Webshop;
 
-use App\Filament\Admin\Resources\Webshop\UnasResource\Pages;
-use App\Filament\Admin\Resources\Webshop\UnasResource\RelationManagers;
+use App\Filament\Admin\Resources\Webshop\ShoprenterResource\Pages;
+use App\Filament\Admin\Resources\Webshop\ShoprenterResource\RelationManagers;
 use App\Filament\Components\Actions\GoToFormAction;
 use App\Filament\Components\Actions\LargeImagePreviewTableAction;
 use App\Forms\Components\IframePreview;
 use App\Forms\Components\ImagePreview;
-use App\Models\Webshop\Unas;
+use App\Models\Webshop\Shoprenter;
 use Filament\Forms;
+use Filament\Forms\Components\Actions as FormActions;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\MaxWidth;
@@ -17,27 +18,26 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\Actions as FormActions;
 
-class UnasResource extends Resource
+class ShoprenterResource extends Resource
 {
 
-    protected static ?string $model = Unas::class;
+    protected static ?string $model = Shoprenter::class;
     protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
 
     public static function getModelLabel(): string
     {
-        return "UNAS";
+        return "Shoprenter";
     }
 
     public static function getPluralModelLabel(): string
     {
-        return "UNAS";
+        return "Shoprenter";
     }
 
     public static function getNavigationLabel(): string
     {
-        return "UNAS";
+        return "Shoprenter";
     }
 
     public static function getNavigationGroup(): ?string
@@ -47,7 +47,7 @@ class UnasResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return Unas::query()->count();
+        return Shoprenter::query()->count();
     }
 
     public static function form(Form $form): Form
@@ -63,13 +63,13 @@ class UnasResource extends Resource
                     Forms\Components\TextInput::make('image_url'),
                 ]),
                 Forms\Components\Section::make('Image')->visibleOn('view')->icon('heroicon-o-photo')->columnSpanFull()->columns(1)->compact()->collapsible()->collapsed()->schema([
-                    ImagePreview::make('image_url')->source(fn(Unas $record) => $record?->image_url),
+                    ImagePreview::make('image_url')->source(fn(Shoprenter $record) => $record?->image_url),
                 ]),
                 Forms\Components\Section::make('Contacts')->visibleOn('view')->icon('heroicon-o-phone')->columnSpanFull()->columns(1)->compact()->collapsible()->collapsed()->schema([
                     FormActions::make([
-                        GoToFormAction::make('open_contacts_page')->url(fn(Unas $record) => $record?->contacts_page_url, true),
+                        GoToFormAction::make('open_contacts_page')->url(fn(Shoprenter $record) => $record?->contacts_page_url, true),
                     ])->fullWidth()->alignCenter(),
-                    IframePreview::make('contacts_page')->source(fn(Unas $record) => $record?->contacts_page_url),
+                    IframePreview::make('contacts_page')->source(fn(Shoprenter $record) => $record?->contacts_page_url),
                 ]),
             ]);
     }
@@ -79,11 +79,11 @@ class UnasResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('favicon')->toggleable(),
-                Tables\Columns\ImageColumn::make('image_url')->tooltip('Preview')->toggleable()->action(LargeImagePreviewTableAction::make()->imageUrl(fn(Unas $record) => $record->image_url)),
+                Tables\Columns\ImageColumn::make('image_url')->tooltip('Preview')->toggleable()->action(LargeImagePreviewTableAction::make()->imageUrl(fn(Shoprenter $record) => $record->image_url)),
                 Tables\Columns\IconColumn::make('checked')->boolean()->toggleable(),
                 Tables\Columns\TextColumn::make('title')->searchable()->sortable()->toggleable(),
-                Tables\Columns\TextColumn::make('url')->tooltip('Open')->searchable()->sortable()->toggleable()->url(fn(Unas $record) => $record->url, true),
-                Tables\Columns\TextColumn::make('contacts_page_url')->tooltip('Open')->toggleable()->url(fn(Unas $record) => $record->contacts_page_url, true),
+                Tables\Columns\TextColumn::make('url')->tooltip('Open')->searchable()->sortable()->toggleable()->url(fn(Shoprenter $record) => $record->url, true),
+                Tables\Columns\TextColumn::make('contacts_page_url')->tooltip('Open')->toggleable()->url(fn(Shoprenter $record) => $record->contacts_page_url, true),
                 Tables\Columns\TextColumn::make('created_at')->dateTime('Y.m.d. H:i:s')->sortable()->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')->dateTime('Y.m.d. H:i:s')->sortable()->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -118,10 +118,10 @@ class UnasResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUnas::route('/'),
-            //'create' => Pages\CreateUnas::route('/create'),
-            //'view' => Pages\ViewUnas::route('/{record}'),
-            //'edit' => Pages\EditUnas::route('/{record}/edit'),
+            'index' => Pages\ListShoprenters::route('/'),
+            //'create' => Pages\CreateShoprenter::route('/create'),
+            //'view' => Pages\ViewShoprenter::route('/{record}'),
+            //'edit' => Pages\EditShoprenter::route('/{record}/edit'),
         ];
     }
 
