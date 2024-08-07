@@ -7,6 +7,15 @@ use Database\Factories\Webshop\ShoprenterFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string|null $title
+ * @property string|null $url
+ * @property string|null $image_url
+ * @property bool $checked
+ * @property array|null $contact_information
+ * @property-read string|null $favicon
+ * @property-read string|null $contacts_page_url
+ */
 class Shoprenter extends Model
 {
     use HasFactory;
