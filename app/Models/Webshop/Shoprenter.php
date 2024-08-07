@@ -3,20 +3,11 @@
 namespace App\Models\Webshop;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Database\Factories\Webshop\UnasFactory;
+use Database\Factories\Webshop\ShoprenterFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * @property string|null $title
- * @property string|null $url
- * @property string|null $image_url
- * @property bool $checked
- * @property array|null $contact_information
- * @property-read string|null $favicon
- * @property-read string|null $contacts_page_url
- */
-class Unas extends Model
+class Shoprenter extends Model
 {
     use HasFactory;
 
@@ -34,9 +25,9 @@ class Unas extends Model
         'contacts_page_url',
     ];
 
-    protected static function newFactory(): UnasFactory|Factory
+    protected static function newFactory(): ShoprenterFactory|Factory
     {
-        return UnasFactory::new();
+        return ShoprenterFactory::new();
     }
 
     // Attributes
@@ -48,7 +39,7 @@ class Unas extends Model
 
     public function getContactsPageUrlAttribute(): string|null
     {
-        return trim($this->url, " \n\r\t\v\0/") . config('unas.contacts_page');
+        return trim($this->url, " \n\r\t\v\0/") . config('shoprenter.contacts_page');
     }
 
 }
