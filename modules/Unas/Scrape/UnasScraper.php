@@ -102,6 +102,12 @@ class UnasScraper
         return $references;
     }
 
+    /**
+     * Just simply doesn't do its job. The different UNAS webshop themes don't share any common structure.
+     * @deprecated
+     * @param Unas $record
+     * @return Unas
+     */
     public function updateContactInformation(Unas $record): Unas
     {
         $keyValueStore = [];
