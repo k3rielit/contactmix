@@ -33,6 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Indigo,
             ])
+            ->databaseNotifications()
             ->sidebarFullyCollapsibleOnDesktop()
             ->maxContentWidth(MaxWidth::Full)
             ->brandName('Contactmix')
